@@ -6,13 +6,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    //ADDRESS BAR
     QLineEdit *addressBar = new QLineEdit;
+    ui->toolBarFichier->insertWidget(ui->actionHome, addressBar);
+
+    //PROGRESS BAR
     QProgressBar *loadingProgress = new QProgressBar();
-    loadingProgress->setVisible(true);
+    loadingProgress->setVisible(false);
     loadingProgress->setMaximumHeight(14);
     loadingProgress->setTextVisible(true);
-    ui->toolBarFichier->insertWidget(ui->actionHome, addressBar);
     ui->statusBar->addWidget(loadingProgress, 1);
+
+    //OTHER ACTIONS
+    connect(ui->actionClose,SIGNAL(triggered()),qApp,SLOT(quit())); //close
+    connect(ui->actionAbout_Qt,SIGNAL(triggered(bool)),qApp,SLOT(aboutQt()));   //aboutQt
 }
 
 MainWindow::~MainWindow()
